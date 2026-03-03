@@ -12,3 +12,7 @@ Credit card issuers lose billions annually to fraud. This project builds product
 - End-to-end pipeline from PostgreSQL → Power BI Python visuals
 
 ## 🛠️ Tech Stack
+
+```
+PostgreSQL (Kartik Shenoy fraud dataset)  →  SQL (80+ queries)  →  Power BI (dashboards + DAX)  →  Python ML (XGBoost + SHAP)
+```

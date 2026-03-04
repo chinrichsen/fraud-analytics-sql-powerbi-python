@@ -1,0 +1,254 @@
+## 1. Basic (20 questions)
+
+1) What is the total number of transactions in the dataset?  
+Relevance: Shows overall data volume and that you can do simple counts (sanity check and data profiling).
+
+2) How many transactions are labeled as fraud vs non‑fraud?  
+Relevance: Gives fraud rate and class imbalance, which is critical context for any fraud or ML work.
+
+3) What is the overall fraud rate (percentage of transactions that are fraud)?  
+Relevance: Basic KPI every fraud analyst should know for a portfolio.
+
+4) What is the total transaction amount and total fraud amount?  
+Relevance: Connects transaction volume to monetary risk and fraud loss.
+
+5) What is the average transaction amount for fraud vs non‑fraud?  
+Relevance: Helps see whether fraud tends to hit higher or lower amounts.
+
+6) What is the minimum, maximum, and average transaction amount overall?  
+Relevance: Basic descriptive statistics to spot outliers or data issues.
+
+7) How many distinct credit cards (cc_num) exist in the dataset?  
+Relevance: Shows portfolio size and helps in later per‑card analysis.
+
+8) How many distinct merchants are in the dataset?  
+Relevance: Indicates merchant universe and potential for merchant‑level risk metrics.
+
+9) How many transactions per year or per month?  
+Relevance: Basic time‑distribution sanity check and seasonality starting point.
+
+10) What is the count of transactions by transaction category (e.g., groceries, gas, etc.)?  
+Relevance: Understands spending mix; later useful for category‑specific fraud patterns.
+
+11) What is the fraud count and fraud rate by category?  
+Relevance: Identifies which categories are fraud‑heavy and may need stricter controls.
+
+12) What is the average transaction amount by category?  
+Relevance: Provides typical ticket sizes and informs threshold rules.
+
+13) What is the number of transactions by state?  
+Relevance: Geographic distribution of your portfolio and activity.
+
+14) What is the fraud count and fraud rate by state?  
+Relevance: Quickly highlights high‑risk geographies.
+
+15) What is the number of transactions by hour of day?  
+Relevance: Time‑of‑day usage pattern; fraud often spikes at off‑hours.
+
+16) What is the fraud count and fraud rate by hour of day?  
+Relevance: Shows if fraud favors certain hours (e.g., night vs day).
+
+17) For each merchant, how many transactions and how many frauds occurred?  
+Relevance: Builds base for merchant risk ranking.
+
+18) For each card, how many transactions and how many frauds occurred?  
+Relevance: Lets you see “problem cards” and is the basis for per‑card risk features.
+
+19) What is the distribution of transactions by customer gender?  
+Relevance: Simple demographic slice; mostly for understanding data, not for rules.
+
+20) What is the fraud rate by customer gender?  
+Relevance: Demonstrates demographic slicing, but also highlights fairness / bias thinking.
+
+***
+
+## 2. Intermediate (20 questions)
+
+21) For each card, what is the first date and last date of activity (transaction window)?  
+Relevance: Shows card “lifetime” and signals dormant vs active cards.
+
+22) For each card, what is the total transaction count, total amount, and fraud rate?  
+Relevance: Key per‑card KPIs; you’ll reuse this as a feature table in ML.
+
+23) For each merchant, what is the total transaction count, fraud count, fraud rate, and total fraud amount?  
+Relevance: Core merchant risk metrics used in monitoring.
+
+24) Among merchants with at least N transactions (e.g., 500), which top 10 have the highest fraud rate?  
+Relevance: Avoids noise from tiny merchants and surfaces meaningful high‑risk merchants.
+
+25) Among merchants with at least N transactions, which top 10 have the highest total fraud amount?  
+Relevance: Focuses on loss exposure rather than rate alone.
+
+26) What are the top 10 cards by total fraud amount?  
+Relevance: Shows worst‑offending cards and supports case‑prioritization thinking.
+
+27) For each hour of day, what is the average transaction amount for fraud vs non‑fraud?  
+Relevance: Combines time and amount to see behavioral differences in fraud.
+
+28) For each state, what is the total transaction amount and total fraud amount?  
+Relevance: Geographic loss and volume view; often used for region‑level risk reporting.
+
+29) For each category, what is the average fraud transaction amount vs average non‑fraud transaction amount?  
+Relevance: Helps design category‑specific rules or dynamic thresholds.
+
+30) For each card, what is the maximum number of transactions in a single day?  
+Relevance: Captures bursty behavior; a common simple fraud rule input.
+
+31) For each card, how many different merchants has it used?  
+Relevance: Card “spread” across merchants can indicate potential compromise patterns.
+
+32) For each merchant, how many distinct cards have transacted there?  
+Relevance: Merchant popularity and potential exposure; useful for network‑style analysis.
+
+33) For each card, what is the average time between its transactions?  
+Relevance: Normal cadence vs spikes; basis for velocity rules.
+
+34) For each city, what is the fraud rate and total fraud amount?  
+Relevance: Finer‑grain geo risk than state, useful for more targeted insights.
+
+35) For each month, what is the fraud rate trend over time?  
+Relevance: Shows whether fraud is increasing, decreasing, or stable over the period.
+
+36) What is the fraud rate for transactions above certain amount thresholds (e.g., >100, >500, >1,000)?  
+Relevance: Classic cut analysis to understand risk by ticket size.
+
+37) For each card, what proportion of its total amount is spent at its top 3 merchants?  
+Relevance: Measures concentration; anomalously concentrated patterns can be suspicious.
+
+38) For each merchant, what proportion of its transactions are from its top 5 cards?  
+Relevance: Detects merchants heavily dependent on a few cards, which can be risky.
+
+39) For each card, how many days had more than X transactions (e.g., >10)?  
+Relevance: Identifies repeated high‑velocity days; signals potential ongoing abuse.
+
+40) For each card, what is the fraud rate before and after a given date (e.g., midpoint of dataset)?  
+Relevance: Simple “before/after” analysis, useful to illustrate cohort or period changes.
+
+***
+
+## 3. Advanced (20 questions)
+
+41) For each card, list the first fraudulent transaction date and the number of days it took from first ever transaction to first fraud.  
+Relevance: Measures “time‑to‑compromise,” a very realistic fraud metric.
+
+42) For each card that had at least one fraud, how many legitimate transactions occurred in the 7 days before its first fraud?  
+Relevance: Shows whether fraud is preceded by reconnaissance or normal spending.
+
+43) For each card, list the three transactions immediately preceding its first fraud (by time).  
+Relevance: Creates context around fraud events; classic windowed investigation query.
+
+44) For each card, calculate rolling 24‑hour transaction count and total amount for every transaction (time‑window via window functions).  
+Relevance: Time‑based velocity features used in near‑real‑time alerting.
+
+45) For each card, calculate rolling 7‑day total transaction amount and compare it to the card’s overall average weekly amount.  
+Relevance: Detects sudden spikes vs baseline behavior.
+
+46) For each merchant, calculate monthly fraud rate, then find merchants whose fraud rate increased by more than X percentage points month‑over‑month.  
+Relevance: Flags merchants whose risk profile is worsening, which is operationally actionable.
+
+47) For each card, compute the number of distinct states in which it transacted, and the maximum distance between any two transaction locations (approximate via lat/long).  
+Relevance: Captures geographic spread; large sudden jumps suggest possible compromise.
+
+48) For each fraud transaction, find the previous transaction of the same card and compute time difference and distance between locations.  
+Relevance: Classic “impossible travel” style query for card‑not‑present / geo‑based rules.
+
+49) For each category, compute fraud rate stratified by time‑of‑day bucket (e.g., night vs day).  
+Relevance: Combines category and temporal dimensions for more nuanced rules.
+
+50) For each merchant, compute the share of fraud amount coming from its top 10 cards.  
+Relevance: Shows whether merchant fraud is concentrated in a small set of cards.
+
+51) For each card, compute the Gini or simple concentration metric of spend across merchants (e.g., Herfindahl index).  
+Relevance: More advanced feature for “behavioral profile” used in ML and rules.
+
+52) For each card, identify the day with its highest fraud amount and report that day’s total transaction amount, total fraud amount, and number of distinct merchants.  
+Relevance: Focuses on “peak fraud days” and whether they look like concentrated attacks.
+
+53) Identify merchants whose fraud rate is significantly above the overall portfolio fraud rate (e.g., > 2 standard deviations above mean fraud rate across merchants).  
+Relevance: Adds a mild statistical flavor to merchant risk ranking.
+
+54) Build a per‑card “home state” as the state where the card has most transactions, then compute fraud rate for in‑home vs out‑of‑home‑state transactions.  
+Relevance: Very realistic rule: out‑of‑home or out‑of‑region transactions often riskier.
+
+55) For each card, compute the share of its total amount that occurred at night (e.g., 22:00–06:00), then compare this distribution for fraud vs non‑fraud cards.  
+Relevance: Behavioral feature; helps show if fraud cards behave differently in time usage.
+
+56) For each card, count the number of different categories used in the last 30 days of the dataset vs previous 30 days.  
+Relevance: Behavior drift detection at category level.
+
+57) For each merchant, compute the ratio of fraud count to unique cards, and unique cards to total transactions.  
+Relevance: Separates “many small frauds across many cards” vs “few cards heavily hit.”
+
+58) For each card, detect days where the number of distinct merchants exceeds a dynamic threshold (e.g., card’s average + 3 standard deviations) and list those days.  
+Relevance: Outlier detection on merchant spread per day.
+
+59) For each card, classify each transaction as “local” or “non‑local” based on distance from its most frequent city, then compute fraud rate by this local/non‑local flag.  
+Relevance: Adds behavioral + geo logic similar to real‑world scoring models.
+
+60) Rank cards by a composite risk score built from normalized features: fraud rate, max daily amount, % spend at night, and number of distinct states, computed in SQL.  
+Relevance: Mimics a simplified risk score using only SQL aggregation and normalization.
+
+***
+
+## 4. Expert (20 questions)
+
+61) Build a per‑card feature table suitable for ML in SQL: one row per card with dozens of aggregated features (e.g., total_txn, total_amt, fraud_rate, avg_amt, max_daily_amt, #merchants, #states, %night_spend, time_to_first_fraud, etc.).  
+Relevance: Shows you can engineer production‑ready features for ML directly in SQL.
+
+62) Build a per‑merchant feature table suitable for merchant risk modeling in SQL, with metrics including monthly fraud trends, concentration of cards, and geographic spread of their customers.  
+Relevance: Merchant underwriting / monitoring style features, showing domain depth.
+
+63) Using SQL only, simulate a simple rule‑based fraud detection system (e.g., transactions flagged as suspicious if: amount > X, night transaction, at high‑risk merchant, etc.) and compute precision/recall against `is_fraud`.  
+Relevance: Bridges from descriptive analytics to evaluation of detection rules.
+
+64) Implement a time‑ordered split in SQL (e.g., 2019 as “train” and 2020 as “test”) and compute how a given rule’s performance changes between train and test.  
+Relevance: Shows understanding of concept drift and model/rule stability over time.
+
+65) Using window functions, measure the “burstiness” of fraud by computing, for each fraud transaction, how many other frauds occur on the same card within ±1 day, ±3 days, ±7 days.  
+Relevance: Captures fraud clustering; useful for case‑linking or network analysis.
+
+66) Identify potential collusive merchant–card pairs by finding merchants where a small subset of cards contributes a large share of both volume and fraud, and the cards also share similar high‑risk patterns elsewhere.  
+Relevance: Introduces latent network / collusion reasoning with pure SQL.
+
+67) Tag each transaction with a basic behavioral segment of the card (e.g., “low volume”, “medium volume”, “high volume”) based on distribution of per‑card monthly volume, using quantiles computed in SQL.  
+Relevance: Shows segmentation logic built directly in SQL, common in risk analytics.
+
+68) Build a SQL query that approximates an “account takeover” pattern: cards where the last 5 transactions in the dataset all occurred in states that were never seen earlier for that card.  
+Relevance: Very realistic fraud scenario, uses temporal and distinct‑value logic.
+
+69) For each card, compute a “geo velocity” feature: distance per hour between consecutive transactions, then flag transactions above a high threshold as “impossible travel” candidates.  
+Relevance: Classic advanced fraud rule implemented with window functions and haversine‑style distance in SQL.
+
+70) For each merchant, compute an “anomaly score” based on how different its fraud rate and ticket size distribution are from the average within its category (e.g., z‑scores).  
+Relevance: Shows category‑peer comparison and outlier scoring for merchants.
+
+71) Create a SQL‑only pipeline (using CTEs) that: filters to a time window, builds per‑card features, applies rule thresholds, and outputs a final scored transaction table for that window.  
+Relevance: Demonstrates end‑to‑end, pipeline‑style thinking just in SQL.
+
+72) Using only SQL, compute a simple calibration table: for a rule that assigns a discrete risk score (1–5), compute for each score the empirical fraud rate.  
+Relevance: Shows understanding of risk score calibration and monitoring.
+
+73) Create a SQL query that simulates a sliding training window: for each month M, use data from months M‑3 to M‑1 to compute per‑card stats, and then evaluate a rule on month M.  
+Relevance: Captures production‑style rolling window model/rule updates.
+
+74) Build card‑to‑merchant bipartite counts and then derive, in SQL, for each pair of merchants, how many cards they share, flagging highly connected merchants.  
+Relevance: Introduces network/graph intuition, useful for organized fraud rings.
+
+75) For each card, compute a “category novelty” score over time: share of amount spent in categories the card has not used in the prior 60 days, per transaction.  
+Relevance: Dynamic behavioral drift feature that resembles advanced ML features.
+
+76) Implement a SQL query that, for each fraud transaction, finds a small set of “similar” non‑fraud transactions (same merchant, similar amount, close in time) to illustrate how hard it can be to distinguish fraud.  
+Relevance: Demonstrates appreciation of fraud detection difficulty and sampling logic.
+
+77) Derive age at transaction from `dob` and `trans_date_trans_time`, then compute fraud rate by age band and category combined.  
+Relevance: Combines derived demographics with behavior, useful for nuanced risk insights.
+
+78) Build a per‑day portfolio summary that includes not just simple aggregates but also distribution metrics (e.g., percentiles of amount, % at night, # cards with >10 txns) and then study how these daily features differ between high‑fraud days and low‑fraud days.  
+Relevance: Portfolio‑level monitoring, helpful for real‑time dashboards and alerts.
+
+79) In SQL, implement a basic “outlier detection” for transaction amounts within each category using IQR or z‑score logic and compute how many of those outliers are fraud vs non‑fraud.  
+Relevance: Connects statistical anomaly detection with fraud labels.
+
+80) Design a SQL query that outputs, for each card, a compact text (or JSON) profile summarizing its key behavioral features and risk indicators (e.g., `"card_profile": {"home_state":"CA","night_spend_pct":0.3,...}` using JSON functions).  
+Relevance: Shows use of advanced PostgreSQL features (JSON) and how SQL can feed downstream APIs or services.
+

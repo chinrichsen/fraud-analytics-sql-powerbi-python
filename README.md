@@ -2,6 +2,8 @@
 
 End-to-end fraud detection analysis using the Kartik Shenoy Credit Card Fraud dataset (1M+ transactions). Demonstrates **basic → intermediate → advanced → expert** techniques across three pillars critical for Fraud/AML roles.
 
+Dataset: https://www.kaggle.com/datasets/kartik2112/fraud-detection/data
+
 ## 🎯 Business Problem
 Credit card issuers lose billions annually to fraud. This project builds production-grade analytics—from raw SQL feature engineering to interactive Power BI dashboards to ML model scoring—all using realistic transaction data.
 
